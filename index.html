@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABC Explorer — учим английский алфавит</title>
+  <meta name="description" content="Интерактивная игра для изучения английского алфавита в начальной школе: 7 режимов, озвучка, прописи и звёзды.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="bg-decor" id="bgDecor" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <button class="brand" type="button" data-nav="home" aria-label="На главную">
+      <span class="brand-logo">🚀</span>
+      <span class="brand-text">ABC<span>Explorer</span></span>
+    </button>
+
+    <div class="topbar-actions">
+      <div class="stars-pill" id="starCounter" title="Заработанные звёзды">⭐ <b>0</b></div>
+      <button class="icon-btn" id="soundToggle" type="button" aria-label="Выключить звук" title="Звук">🔊</button>
+      <button class="icon-btn icon-btn--help" id="aboutBtn" type="button" aria-label="О проекте" title="О проекте">?</button>
+    </div>
+  </header>
+
+  <main id="app">
+
+    <!-- ================= ГЛАВНАЯ ================= -->
+    <section class="screen screen-home is-active" id="screen-home">
+      <div class="hero">
+        <div class="hero-text">
+          <span class="eyebrow">Интерактивная игра · 2–3 класс</span>
+          <h1>Учим английский <em>алфавит</em> играя</h1>
+          <p>26 букв, 7 мини-игр и весёлые задания. Слушай, ищи, собирай слова, обводи буквы и зарабатывай звёзды!</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="button" data-nav="alphabet">Начать учить алфавит</button>
+            <button class="btn btn-ghost" type="button" data-scroll-games>Выбрать игру ↓</button>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-halo"></div>
+          <div class="art-card art-1"><span class="art-letter">A</span><span class="art-emoji">🍎</span></div>
+          <div class="art-card art-2"><span class="art-letter">b</span><span class="art-emoji">⚽</span></div>
+          <div class="art-card art-3"><span class="art-letter">C</span><span class="art-emoji">🐱</span></div>
+          <div class="art-chip art-chip-1">⭐</div>
+          <div class="art-chip art-chip-2">🎧</div>
+        </div>
+      </div>
+
+      <div class="stats" id="stats">
+        <div class="stat">
+          <span class="stat-icon">🔤</span>
+          <div class="stat-body">
+            <span class="stat-label">Изучено букв</span>
+            <span class="stat-value"><b data-stat="learned">0</b> / 26</span>
+          </div>
+          <div class="stat-track"><div class="stat-fill stat-fill--violet" data-stat-bar="learned"></div></div>
+        </div>
+
+        <div class="stat">
+          <span class="stat-icon">✏️</span>
+          <div class="stat-body">
+            <span class="stat-label">Обведено в прописях</span>
+            <span class="stat-value"><b data-stat="traced">0</b> / 26</span>
+          </div>
+          <div class="stat-track"><div class="stat-fill stat-fill--pink" data-stat-bar="traced"></div></div>
+        </div>
+
+        <div class="stat">
+          <span class="stat-icon">⭐</span>
+          <div class="stat-body">
+            <span class="stat-label">Звёзд заработано</span>
+            <span class="stat-value"><b data-stat="stars">0</b></span>
+          </div>
+          <div class="stat-track"><div class="stat-fill stat-fill--sun" data-stat-bar="stars"></div></div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Выбери игру</h2>
+      <div class="games-grid" id="gamesGrid"></div>
+
+      <div class="teacher-note">
+        <span class="tn-icon">🎓</span>
+        <div class="tn-text">
+          <h3>Для учителя и родителей</h3>
+          <p>Игра подходит для индивидуальной работы, работы в парах и на интерактивной доске. Один раунд занимает 3–5 минут и может использоваться как разминка в начале урока.</p>
+        </div>
+        <button class="btn btn-soft" type="button" data-open-about>Подробнее</button>
+      </div>
+
+      <footer class="site-footer">Курсовой проект · Интерактивная игра «ABC Explorer» · 2026</footer>
+    </section>
+
+    <!-- ================= АЛФАВИТ ================= -->
+    <section class="screen screen-alphabet" id="screen-alphabet">
+      <div class="page-head">
+        <button class="btn btn-ghost btn-back" type="button" data-nav="home">← <span>На главную</span></button>
+        <div class="page-head-text">
+          <h2>Алфавит</h2>
+          <p>Нажми на букву, чтобы услышать её и выучить новое слово</p>
+        </div>
+        <button class="btn btn-soft" id="playAlphabet" type="button">🔊 Слушать всё</button>
+      </div>
+      <div class="alphabet-grid" id="alphabetGrid"></div>
+      <p class="alphabet-tip">💡 Совет: сначала послушай букву, потом повтори её вслух и назови слово.</p>
+    </section>
+
+    <!-- ================= ПРОПИСИ ================= -->
+    <section class="screen screen-trace" id="screen-trace">
+      <div class="page-head">
+        <button class="btn btn-ghost btn-back" type="button" data-nav="home">← <span>На главную</span></button>
+        <div class="page-head-text">
+          <h2>Прописи</h2>
+          <p>Обведи букву пальцем или мышкой — и получи звезду</p>
+        </div>
+        <button class="btn btn-soft" id="traceSay" type="button">🔊 Буква</button>
+      </div>
+
+      <div class="trace-layout">
+        <div class="trace-board">
+          <div class="trace-guide" id="traceGuide" aria-hidden="true">
+            <span class="tg-upper">A</span><span class="tg-lower">a</span>
+          </div>
+          <canvas id="traceCanvas" aria-label="Поле для обведения буквы"></canvas>
+        </div>
+
+        <aside class="trace-side">
+          <div class="trace-nav">
+            <button class="icon-btn" id="tracePrev" type="button" aria-label="Предыдущая буква">←</button>
+            <div class="trace-current">
+              <b id="traceLetter">A</b>
+              <small id="tracePos">1 / 26</small>
+            </div>
+            <button class="icon-btn" id="traceNext" type="button" aria-label="Следующая буква">→</button>
+          </div>
+
+          <div class="trace-actions">
+            <button class="btn btn-soft" id="traceClear" type="button">🧽 Очистить</button>
+            <button class="btn btn-primary" id="traceDone" type="button">✅ Готово</button>
+          </div>
+
+          <div class="trace-progress">
+            <span>Обведено букв</span>
+            <b><span id="traceCount">0</span> / 26</b>
+            <div class="stat-track"><div class="stat-fill stat-fill--pink" id="traceBar"></div></div>
+          </div>
+
+          <p class="trace-hint">Подсказка: начни с верхней точки буквы и веди линию плавно, не отрывая руки.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================= ИГРА ================= -->
+    <section class="screen screen-game" id="screen-game">
+      <div class="game-head">
+        <button class="btn btn-ghost btn-back" id="gameBack" type="button" aria-label="Назад">←</button>
+        <div class="game-head-text">
+          <h2 id="gameTitle">Игра</h2>
+          <p id="gameSubtitle">Загрузка…</p>
+        </div>
+        <div class="score-pill" id="gameScore">⭐ 0</div>
+      </div>
+      <div class="game-bar"><div class="game-bar-fill" id="gameBar"></div></div>
+      <div class="game-stage" id="gameStage"></div>
+    </section>
+
+    <!-- ================= РЕЗУЛЬТАТЫ ================= -->
+    <section class="screen screen-results" id="screen-results">
+      <div class="results-card">
+        <div class="results-emoji" id="resultsEmoji">🏆</div>
+        <h2 id="resultsTitle">Отличная работа!</h2>
+        <p id="resultsSub">Ты выполнил все задания</p>
+        <div class="results-stars" id="resultsStars"></div>
+        <div class="results-extra" id="resultsExtra"></div>
+        <div class="results-actions">
+          <button class="btn btn-primary" id="resultsRetry" type="button">🔁 Играть снова</button>
+          <button class="btn btn-soft" id="resultsHome" type="button">🏠 К играм</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= КАРТОЧКА БУКВЫ ================= -->
+  <div class="overlay" id="letterOverlay" hidden>
+    <div class="letter-card" role="dialog" aria-modal="true" aria-labelledby="letterBig">
+      <button class="overlay-close" type="button" data-close-letter aria-label="Закрыть">✕</button>
+
+      <div class="letter-card-main">
+        <div class="letter-big" id="letterBig">A</div>
+        <div class="letter-info">
+          <div class="letter-name" id="letterName">/eɪ/ · «эй»</div>
+          <div class="letter-word">
+            <span class="letter-emoji" id="letterEmoji">🍎</span>
+            <span class="letter-word-text">
+              <b id="letterWord">Apple</b>
+              <small id="letterRu">яблоко</small>
+            </span>
+          </div>
+          <div class="letter-actions">
+            <button class="btn btn-primary" id="sayLetterBtn" type="button">🔊 Буква</button>
+            <button class="btn btn-soft" id="sayWordBtn" type="button">🔊 Слово</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="letter-nav">
+        <button class="icon-btn" id="letterPrev" type="button" aria-label="Предыдущая буква">←</button>
+        <span id="letterPos">1 / 26</span>
+        <button class="icon-btn" id="letterNext" type="button" aria-label="Следующая буква">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= О ПРОЕКТЕ ================= -->
+  <div class="overlay" id="aboutOverlay" hidden>
+    <div class="about-card" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+      <button class="overlay-close" type="button" data-close-about aria-label="Закрыть">✕</button>
+      <h2 id="aboutTitle">О проекте</h2>
+      <p class="about-lead">«ABC Explorer» — интерактивная игра для изучения английского алфавита в начальной школе.</p>
+
+      <div class="about-grid">
+        <div class="about-block">
+          <h3>🎯 Цель</h3>
+          <p>Сформировать устойчивое узнавание букв английского алфавита, их заглавного и строчного начертания, а также первых английских слов в игровой форме.</p>
+        </div>
+        <div class="about-block">
+          <h3>👩‍🏫 Для учителя</h3>
+          <p>7 режимов: изучение алфавита, прописи, узнавание букв, аудирование, составление слов, алфавитный порядок и «пары». Подходит для разминки, индивидуальной работы и интерактивной доски.</p>
+        </div>
+        <div class="about-block">
+          <h3>🧠 Что тренируется</h3>
+          <p>Зрительная память, фонематический слух, мелкая моторика, внимание и навык соотнесения буквы со звуком и словом.</p>
+        </div>
+        <div class="about-block">
+          <h3>⚙️ Технологии</h3>
+          <p>HTML5, CSS3, JavaScript (ES6), Web Speech API (озвучка), Web Audio API (звуки), Canvas (прописи), localStorage (прогресс). Без сторонних библиотек.</p>
+        </div>
+      </div>
+
+      <div class="about-bottom">
+        <p class="about-note">Прогресс сохраняется в браузере на этом устройстве. Озвучка работает, если в системе установлен английский голос.</p>
+        <button class="btn btn-ghost btn-small" id="resetProgress" type="button">Сбросить прогресс</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+
+  <noscript>
+    <div class="noscript">Для работы игры включите JavaScript в браузере.</div>
+  </noscript>
+
+  <script src="js/data.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/games/find.js"></script>
+  <script src="js/games/listen.js"></script>
+  <script src="js/games/word.js"></script>
+  <script src="js/games/order.js"></script>
+  <script src="js/games/memory.js"></script>
+  <script src="js/screens.js"></script>
+  <script src="js/trace.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
